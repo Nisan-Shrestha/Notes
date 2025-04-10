@@ -1,12 +1,11 @@
 import express from 'express';
 import { requestLogger } from "./middlewares/logger";
-import router from "./routes/index";
+import router from "./routes/router";
 
 const app = express();
 app.use(requestLogger);
 app.use(express.json());
 app.use(router);
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
@@ -15,12 +14,10 @@ app.listen(PORT, () => {
 
 
 
-// import cookieParser from "cookie-parser";
-import cors from "cors";
-import config from "./config";
-import { genericErrorHandler } from "./middleware/errorHandler";
-
-
+// // import cookieParser from "cookie-parser";
+// import cors from "cors";
+// import config from "./config";
+// import { genericErrorHandler } from "./middleware/errorHandler";
 
 // app.use(
 //   cors({
@@ -30,8 +27,8 @@ import { genericErrorHandler } from "./middleware/errorHandler";
 //   })
 // );
 // app.use(notFoundError);
-app.use(genericErrorHandler);
+// app.use(genericErrorHandler);
 
-app.listen(config.port, () => {
-  console.log(`Server running on port ${config.port}`);
-});
+// app.listen(config.port, () => {
+//   console.log(`Server running on port ${config.port}`);
+// });
