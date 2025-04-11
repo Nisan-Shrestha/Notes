@@ -1,10 +1,10 @@
+import { Request, Response, NextFunction } from "express";
+import { StatusCodes } from "http-status-codes";
 import * as AuthService from "../services/Auth.Services";
-import {
-  ReasonPhrases,
-  StatusCodes,
-  getReasonPhrase,
-  getStatusCode,
-} from "http-status-codes";
+import loggerWithNameSpace from "../utils/logger";
+import { BaseError } from "../utils/BaseError";
+
+const logger = loggerWithNameSpace("AuthController");
 
 export async function signup(req: Request, res: Response, next: NextFunction) {
   const data = req.body;
@@ -12,21 +12,15 @@ export async function signup(req: Request, res: Response, next: NextFunction) {
   let serviceResponse = await AuthService.signup(data);
 
   if (serviceResponse) {
-    let message = serviceResponse.redirected
-      ? "Logged in Successfully"
-      : "Signup Successfull";
-    
     res.status(StatusCodes.CREATED).json({
-      message: "Logged in succesfully.",
+      message: "Signed Up succesfully.",
       payload: {
         accessToken: serviceResponse.accessToken,
         refreshToken: serviceResponse.refreshToken,
       },
     });
-
     return;
   }
 
-  logger.error("signup Failed:");
-  throw new Unauthorized("signup Failed");
+  throw new BaseError(StatusCodes.INTERNAL_SERVER_ERROR,"Signup Failed");
 }
