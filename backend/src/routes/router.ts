@@ -1,7 +1,8 @@
 import express from "express";
-
+import { Request } from "../utils/requestHandler";
 import authRouter from "./Auth.Routes";
-import { Request } from "../interfaces/Auth.Interface";
+import notesRouter from "./Notes.Routes";
+import categoriesRouter from "./Categories.Routes";
 const router = express();
 // router.use("/auth", authRouter);
 
@@ -11,6 +12,7 @@ router.get("/", (req: Request, res) => {
 });
 
 router.use("/auth", authRouter);
-
+router.use("/notes", notesRouter);
+router.use("/categories", categoriesRouter);
 //
 export default router;

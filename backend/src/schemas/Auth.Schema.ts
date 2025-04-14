@@ -14,4 +14,17 @@ export const createUserSchema = z.object({
   }),
 });
 
+export const loginSchema = z.object({
+  body: z.object({
+    identifier: z.string().min(3, "Username or email is required"),
+    password: z.string().min(8, "Password must be at least 8 characters"),
+  }),
+});
+
 export type CreateUserDTO = z.infer<typeof createUserSchema>["body"];
+export type LoginDTO = z.infer<typeof loginSchema>["body"];
+
+export interface AuthTokens {
+  accessToken: string;
+  refreshToken: string;
+}

@@ -1,15 +1,14 @@
 import { NextFunction, Request, Response } from "express";
-import { z } from "zod";
 // import { BadRequest } from "../error/BadRequest";
-import loggerWithNameSpace from "../utils/logger";
 import { ZodSchema } from "zod";
 import { BaseError } from "../utils/BaseError";
+import loggerWithNameSpace from "../utils/logger";
 
 type AnySchema = ZodSchema<any, any>;
 
 const logger = loggerWithNameSpace("SchemaValidation");
 
-export const validateZod =
+export const validateReqSchema =
   (schema: AnySchema) => (req: Request, res: Response, next: NextFunction) => {
     const parseResult = schema.safeParse({
       body: req.body,
@@ -23,12 +22,10 @@ export const validateZod =
         message: e.message,
       }));
       logger.error("Validation failed", { errors });
-      return next(new BaseError(400, "Request validation failed"));
+      next(new BaseError(400, `${errors[0].path}.${errors[0].message}`, parseResult.error));
+      return;
     }
 
-    const { body, params, query } = parseResult.data;
-    req.body = body;
-    req.params = params;
-    req.query = query;
+    res.locals.validated = parseResult.data;
     next();
   };

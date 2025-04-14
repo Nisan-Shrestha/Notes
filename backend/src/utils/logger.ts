@@ -1,6 +1,6 @@
 import winston from "winston";
 
-const isDev = process.env.NODE_ENV === "development";
+const isDev = process.env.NODE_ENV === "dev";
 
 const loggerWithNameSpace = function (namespace: string) {
   return logger.child({ namespace });
