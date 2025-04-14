@@ -1,0 +1,10 @@
+import prisma from "./config/prismaClient";
+
+prisma.user.create({
+  data: {
+    email: "nisantheman@gmail.com",
+    name: "Nisan Shrestha",
+    username: "nick",
+  },
+}).then((res)=>console.log(res));
+prisma.user.findMany().then((res) => console.log(res));
