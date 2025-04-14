@@ -1,13 +1,13 @@
+import { Note } from "@prisma/client";
+import { StatusCodes } from "http-status-codes";
+import prisma from "../config/prismaClient";
+import * as NotesModel from "../models/Notes.Model";
+import { BaseError } from "../utils/BaseError";
 import {
   CreateNoteDTO,
   ListNotesQueryDTO,
   UpdateNoteDTO,
 } from "./../schemas/Notes.Schema";
-import * as NotesModel from "../models/Notes.Model";
-import prisma from "../config/prismaClient";
-import { BaseError } from "../utils/BaseError";
-import { StatusCodes } from "http-status-codes";
-import { Note } from "@prisma/client";
 
 export async function createNoteService(input: CreateNoteDTO): Promise<Note> {
   const { authorId, categoryIds } = input;

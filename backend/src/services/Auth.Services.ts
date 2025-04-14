@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import { StatusCodes } from "http-status-codes";
 import { JwtPayload, sign, verify } from "jsonwebtoken";
+import type { StringValue } from "ms";
 import config from "../config";
 import {
   createUser,
@@ -9,7 +10,6 @@ import {
 } from "../models/User.Model";
 import { AuthTokens, CreateUserDTO, LoginDTO } from "../schemas/Auth.Schema";
 import { BaseError } from "../utils/BaseError";
-import type { StringValue } from "ms";
 
 export async function signup(userInfo: CreateUserDTO): Promise<AuthTokens> {
   userInfo.username = userInfo.username.toLowerCase();

@@ -9,9 +9,9 @@ import {
 import { authenticate } from "../middlewares/Auth.Middleware";
 import { validateReqSchema } from "../middlewares/validator";
 import {
+  categoryIdParamSchema,
   createCategorySchema,
   listCategoriesQuerySchema,
-  categoryIdParamSchema,
   updateCategorySchema,
 } from "../schemas/Categories.Schema";
 import { handleRequest } from "../utils/requestHandler";

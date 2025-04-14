@@ -6,7 +6,11 @@ import { handleRequest } from "../utils/requestHandler";
 
 const router = express();
 
-router.post("/signup", validateReqSchema(createUserSchema), handleRequest(signup));
+router.post(
+  "/signup",
+  validateReqSchema(createUserSchema),
+  handleRequest(signup)
+);
 router.post("/login", validateReqSchema(loginSchema), handleRequest(login));
 router.post("/refresh-token", handleRequest(refresh));
 

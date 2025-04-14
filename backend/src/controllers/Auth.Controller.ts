@@ -1,10 +1,10 @@
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import * as AuthService from "../services/Auth.Services";
-import loggerWithNameSpace from "../utils/logger";
 import { BaseError } from "../utils/BaseError";
-import { returnResponse } from "../utils/requestHandler";
 import { refreshTokenCookieOptions } from "../utils/cookieOptions";
+import loggerWithNameSpace from "../utils/logger";
+import { returnResponse } from "../utils/requestHandler";
 
 const logger = loggerWithNameSpace("AuthController");
 

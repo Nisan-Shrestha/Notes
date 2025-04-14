@@ -1,5 +1,5 @@
-import config from "../config";
 import ms, { StringValue } from "ms";
+import config from "../config";
 
 export const refreshTokenCookieOptions = {
   httpOnly: true,

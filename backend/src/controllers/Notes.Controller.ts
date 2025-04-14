@@ -1,8 +1,8 @@
-import * as NoteService from "../services/Notes.Services";
-import { Response, NextFunction } from "express";
-import { Request, returnResponse } from "../utils/requestHandler";
-import { BaseError } from "../utils/BaseError";
+import { NextFunction, Response } from "express";
 import { StatusCodes } from "http-status-codes";
+import * as NoteService from "../services/Notes.Services";
+import { BaseError } from "../utils/BaseError";
+import { Request, returnResponse } from "../utils/requestHandler";
 
 export async function createNote(
   req: Request,

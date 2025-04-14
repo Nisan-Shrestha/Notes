@@ -1,13 +1,13 @@
+import { Category } from "@prisma/client";
+import { StatusCodes } from "http-status-codes";
+import prisma from "../config/prismaClient";
+import * as CategoriesModel from "../models/Categories.Model";
 import {
   CreateCategoryDTO,
   ListCategoriesQueryDTO,
   UpdateCategoryDTO,
 } from "../schemas/Categories.Schema";
-import * as CategoriesModel from "../models/Categories.Model";
-import prisma from "../config/prismaClient";
 import { BaseError } from "../utils/BaseError";
-import { StatusCodes } from "http-status-codes";
-import { Category } from "@prisma/client";
 
 export async function createCategoryService(
   input: CreateCategoryDTO

@@ -51,7 +51,9 @@ export const listNotesQuerySchema = z.object({
     sortBy: z
       .enum(["asc", "desc"], {
         invalid_type_error: "SortOrder must be 'asc' or 'desc'",
-      }).optional().default("desc"),
+      })
+      .optional()
+      .default("desc"),
     search: z.string().optional(),
   }),
 });

@@ -1,8 +1,8 @@
-import * as CategoryService from "../services/Categories.Services";
-import { Response, NextFunction } from "express";
-import { Request, returnResponse } from "../utils/requestHandler";
-import { BaseError } from "../utils/BaseError";
+import { NextFunction, Response } from "express";
 import { StatusCodes } from "http-status-codes";
+import * as CategoryService from "../services/Categories.Services";
+import { BaseError } from "../utils/BaseError";
+import { Request, returnResponse } from "../utils/requestHandler";
 
 export async function createCategory(
   req: Request,

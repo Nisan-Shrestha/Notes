@@ -22,7 +22,13 @@ export const validateReqSchema =
         message: e.message,
       }));
       logger.error("Validation failed", { errors });
-      next(new BaseError(400, `${errors[0].path}.${errors[0].message}`, parseResult.error));
+      next(
+        new BaseError(
+          400,
+          `${errors[0].path}.${errors[0].message}`,
+          parseResult.error
+        )
+      );
       return;
     }
 
