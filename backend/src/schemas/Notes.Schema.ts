@@ -54,6 +54,12 @@ export const listNotesQuerySchema = z.object({
       })
       .optional()
       .default("desc"),
+    sortByField: z
+      .enum(["createdAt", "updatedAt"], {
+        invalid_type_error: "SortByField must be 'createdAt' or 'updatedAt'",
+      })
+      .optional()
+      .default("createdAt"),
     search: z.string().optional(),
   }),
 });

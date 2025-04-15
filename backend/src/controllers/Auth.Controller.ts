@@ -8,6 +8,28 @@ import { returnResponse } from "../utils/requestHandler";
 
 const logger = loggerWithNameSpace("AuthController");
 
+export async function checkUsername(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const { username } = req.params;
+  const serviceResponse = await AuthService.checkUsername(username);
+  if (!serviceResponse) {
+    throw new BaseError(
+      StatusCodes.INTERNAL_SERVER_ERROR,
+      "Username check failed"
+    );
+  }
+  returnResponse(
+    res,
+    { available: serviceResponse },
+    "Username check successful",
+    StatusCodes.OK
+  );
+  return;
+}
+
 export async function signup(req: Request, res: Response, next: NextFunction) {
   const data = res.locals.validated.body;
 
@@ -23,7 +45,7 @@ export async function signup(req: Request, res: Response, next: NextFunction) {
 
   returnResponse(
     res,
-    { accessToken: serviceResponse.accessToken },
+    { accessToken: serviceResponse.accessToken, user: serviceResponse.user },
     "User Created Successfully",
     StatusCodes.CREATED
   );
@@ -46,7 +68,7 @@ export async function login(req: Request, res: Response, next: NextFunction) {
 
   returnResponse(
     res,
-    { accessToken: serviceResponse.accessToken },
+    { accessToken: serviceResponse.accessToken, user: serviceResponse.user },
     "User Logged In Successfully",
     StatusCodes.OK
   );
@@ -72,9 +94,27 @@ export async function refresh(req: Request, res: Response, next: NextFunction) {
 
   returnResponse(
     res,
-    { accessToken: serviceResponse.accessToken },
+    { accessToken: serviceResponse.accessToken, user: serviceResponse.user },
     "Token refreshed successfully",
     StatusCodes.OK
   );
   return;
+}
+
+export async function logout(req: Request, res: Response, next: NextFunction) {
+  res.clearCookie("refreshToken");
+  returnResponse(res, {}, "Logged out successfully", StatusCodes.OK);
+}
+
+export async function getSelf(req: Request, res: Response, next: NextFunction) {
+  const token = req.cookies.refreshToken;
+  const serviceResponse = await AuthService.getSelf(token);
+  if (!serviceResponse) {
+    throw new BaseError(StatusCodes.UNAUTHORIZED, "Could not fetch user");
+  }
+  const user = serviceResponse;
+  if (!user) {
+    throw new BaseError(StatusCodes.UNAUTHORIZED, "User not found");
+  }
+  returnResponse(res, { user }, "User fetched successfully", StatusCodes.OK);
 }

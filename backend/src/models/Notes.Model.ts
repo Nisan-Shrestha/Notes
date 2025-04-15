@@ -42,32 +42,44 @@ export async function getNoteById(noteId: string, userId: string) {
 
 export async function listNotes(
   userID: string,
-  { page = 0, limit = 10, categoryIds, search, sortBy }: ListNotesQueryDTO
+  {
+    page = 0,
+    limit = 10,
+    categoryIds,
+    search,
+    sortBy,
+    sortByField,
+  }: ListNotesQueryDTO
 ) {
   const skip = page * limit;
-  const notes = await prisma.note.findMany({
-    where: {
-      authorId: userID,
-      AND: [
-        search
-          ? {
-              OR: [
-                { title: { contains: search, mode: "insensitive" } },
-                { content: { contains: search, mode: "insensitive" } },
-              ],
-            }
-          : {},
-        categoryIds && categoryIds.length > 0
-          ? {
-              categories: {
-                some: {
-                  categoryId: { in: categoryIds },
-                },
-              },
-            }
-          : {},
+
+  const andConditions: any[] = [{ authorId: userID }];
+
+  if (search) {
+    andConditions.push({
+      OR: [
+        { title: { contains: search, mode: "insensitive" } },
+        { content: { contains: search, mode: "insensitive" } },
       ],
-    },
+    });
+  }
+
+  if (categoryIds && categoryIds.length > 0) {
+    andConditions.push({
+      categories: {
+        some: {
+          categoryId: { in: categoryIds },
+        },
+      },
+    });
+  }
+
+  const totalCount = await prisma.note.count({
+    where: { AND: andConditions },
+  });
+
+  const notes = await prisma.note.findMany({
+    where: { AND: andConditions },
     include: {
       categories: {
         include: {
@@ -76,13 +88,15 @@ export async function listNotes(
       },
     },
     orderBy: {
-      createdAt: sortBy ?? "desc",
+      [sortByField ?? "createdAt"]: sortBy ?? "desc",
     },
     skip,
     take: limit,
   });
 
-  return notes;
+  const totalPages = Math.ceil(totalCount / limit);
+
+  return { notes, meta: { totalCount, totalPages, page, limit } };
 }
 
 export async function updateNote(
