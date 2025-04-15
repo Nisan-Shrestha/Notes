@@ -6,6 +6,55 @@ Parts of this Readme.md file was generated using AI.
 
 This is a full-stack application for managing notes and categories. It includes user authentication, note creation, categorization, and search functionality. The project is built using modern web technologies and follows best practices for scalability and maintainability.
 
+## Technical Checklist
+
+- [x] **Notes**
+  - [x] Create notes
+  - [x] Edit notes
+  - [x] Delete notes
+  - [x] View list of notes
+  - [x] View a single note
+- [x] **Categories**
+  - [x] Add multiple categories to a note.
+  - [x] Filter notes based on category.
+- [x] **Authentication/Authorization**
+  - [x] Signup
+  - [x] Login
+- [x] **Tech stack needed:**
+  - [x] FE: React
+  - [x] BE: Node
+  - [x] Database: MySQL (Or any relational database) [Note: used PostgreSQL with Prisma ORM]
+
+## Expectations from the Assignment.
+- [x] Feature Implementation
+  - [x] CRUD operations for notes
+  - [x] Authentication system with login and signup
+
+- [x] Engineering Requirements
+  - [x] UI should be clean and responsive
+  - [x] Implement frontend and backend validations to ensure data integrity
+  - [x] Display proper error messages for validation and backend errors
+  - [x] Graceful error handling throughout the application
+  - [x] Secure authentication mechanism
+  - [x] Authorization to protect/restrict pages and APIs
+  - [x] Protected pages/APIs must be secure
+  - [x] APIs should follow RESTful conventions
+  - [x] Pagination and filters should be server-side
+  - [x] Consider database design and normalization (documentation optional)
+
+- [ ] Preferred Expectations (Nice to Have)
+  - [ ] Reusable frontend components (e.g., buttons, tables, navbars, dialogs)
+  - [ ] Include unit tests (any additional test types are preferred)
+  - [x] Backend logging implementation
+  - [ ] API documentation using tools like Swagger
+  - [x] Use migration tools to track database changes
+  - [ ] Additional authentication features (e.g., 2FA, account verification via email/phone)
+
+- [x] Additional Features to Consider
+  - [x] Search notes by title or content
+  - [x] Sorting options for notes (e.g., by creation date, last modified, alphabetical)
+
+
 ## Features
 
 - **User Authentication**: Secure login and registration with JWT-based authentication.
