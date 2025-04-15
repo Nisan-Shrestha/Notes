@@ -37,7 +37,7 @@ export const listCategoriesQuerySchema = z.object({
         invalid_type_error: "SortOrder must be 'asc' or 'desc'",
       })
       .optional()
-      .default("desc"),
+      .default("asc"),
   }),
 });
 

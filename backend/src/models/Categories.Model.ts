@@ -28,9 +28,9 @@ export async function getCategoryById(categoryId: string, userId: string) {
 
 export async function listCategories(
   userID: string,
-  { page = 0, limit = 10, search, sortBy }: ListCategoriesQueryDTO
+  { page = 0, limit = 0, search, sortBy }: ListCategoriesQueryDTO
 ) {
-  const skip = page * limit;
+  const skip = limit > 0 ? page * limit : undefined;
 
   const categories = await prisma.category.findMany({
     where: {
@@ -42,10 +42,10 @@ export async function listCategories(
         : {}),
     },
     orderBy: {
-      createdAt: sortBy ?? "desc",
+      name: sortBy ?? "asc",
     },
     skip,
-    take: limit,
+    take: limit > 0 ? limit : undefined,
   });
 
   return categories;
