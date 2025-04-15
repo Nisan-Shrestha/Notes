@@ -63,7 +63,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     } catch (err) {
       console.error("Login error:", err);
       setError("Login failed");
-      toast.error("Login failed.Please check your credentials.");
     } finally {
       setIsLoading(false);
     }
@@ -118,6 +117,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         username
       );
       if (error) {
+        if (error === "Failed to fetch") {
+          toast.error("Network error. Can't connect to server.");
+        }
         setError(error);
         throw new Error(error);
       }

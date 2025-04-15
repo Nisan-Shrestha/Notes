@@ -100,7 +100,6 @@ export async function apiRequest<T>(
       body: body ? JSON.stringify(body) : undefined,
       credentials: "include",
     });
-
     if (response.status === 401 && authenticated && !skipRefreshToken) {
       const refreshSuccessful = await refreshToken();
       console.log("Refresh token successful:", refreshSuccessful);

@@ -19,7 +19,6 @@ export const noteService = {
     response.data!.categoryIds = response.data?.categories.map(
       (category) => category.categoryId
     );
-    console.log(response.data);
     return response;
   },
 
@@ -48,7 +47,6 @@ export const noteService = {
       (n) =>
         (n.categoryIds = n.categories.map((category) => category.categoryId))
     );
-    console.log(response.data);
     return response;
   },
 
@@ -57,6 +55,9 @@ export const noteService = {
     if (response.error) {
       toast.error("Failed to create note");
     }
+    response.data!.categoryIds = response.data?.categories.map(
+      (category) => category.categoryId
+    );
     return response;
   },
   async updateNote(noteId: string, note: UpdateNoteDTO) {
@@ -64,6 +65,9 @@ export const noteService = {
     if (response.error) {
       toast.error("Failed to update note");
     }
+    response.data!.categoryIds = response.data?.categories.map(
+      (category) => category.categoryId
+    );
     return response;
   },
 
@@ -72,6 +76,9 @@ export const noteService = {
     if (response.error) {
       toast.error("Failed to delete note");
     }
+    response.data!.categoryIds = response.data?.categories.map(
+      (category) => category.categoryId
+    );
     return response;
   },
 };

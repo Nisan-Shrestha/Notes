@@ -319,8 +319,10 @@ const Home = () => {
           open={isViewDialogOpen}
           onOpenChange={setIsViewDialogOpen}
           note={currentNote}
-          categories={categories.filter((cat) =>
-            currentNote.categoryIds!.includes(cat.id)
+          categories={categories.filter(
+            (cat) =>
+              currentNote.categoryIds &&
+              currentNote.categoryIds.includes(cat.id)
           )}
           onEdit={() => {
             setIsViewDialogOpen(false);

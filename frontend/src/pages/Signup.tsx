@@ -104,7 +104,7 @@ function SignUp() {
   }, [username]);
 
   function onSubmit(values: z.infer<typeof signupSchema>) {
-    if (!usernameStatus.isAvailable) {
+    if (usernameStatus.isAvailable === false) {
       toast.error("Username is already taken");
       return;
     }
@@ -188,7 +188,11 @@ function SignUp() {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input placeholder="Password" {...field} />
+                        <Input
+                          placeholder="Password"
+                          type="password"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -201,7 +205,11 @@ function SignUp() {
                     <FormItem>
                       <FormLabel>Confirm Password</FormLabel>
                       <FormControl>
-                        <Input placeholder="Retype Password" {...field} />
+                        <Input
+                          placeholder="Retype Password"
+                          type="password"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -223,7 +231,7 @@ function SignUp() {
       </div>
       <div className="relative hidden bg-muted lg:block">
         <img
-          src="/vite.svg"
+          src="/banner.png"
           alt="Image"
           className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />
