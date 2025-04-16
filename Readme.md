@@ -2,6 +2,9 @@
 
 Parts of this Readme.md file was generated using AI.
 
+# Live Deployement
+[Here:](http://164.152.166.115:3005/) (May or may not be available) 
+
 # Notes Application
 
 This is a full-stack application for managing notes and categories. It includes user authentication, note creation, categorization, and search functionality. The project is built using modern web technologies and follows best practices for scalability and maintainability.
